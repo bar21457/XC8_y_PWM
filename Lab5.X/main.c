@@ -53,6 +53,7 @@ int V1_ADRESH;
 int V2_ADRESH;
 int V3_ADRESH;
 int SERVO;
+uint8_t CONT_TMR0;
 
 //******************************************************************************
 // Prototipos de Funciones
@@ -66,6 +67,35 @@ void convertir(int V_ADRESH);
 //******************************************************************************
 // Interrupciones
 //******************************************************************************
+void __interrupt() isr (void){
+    
+    // Interrupción del ADC
+    
+    if (PIR1bits.ADIF)          // Una vez terminada la conversión
+    {
+        PORTBbits.RB7 = 1;      // Encender el RB7
+        PIR1bits.ADIF = 0;      // Bajamos la bandera de interrupción del ADC
+    }
+    
+    //Interrupción del TMR0
+    
+    if (INTCONbits.T0IF)        // Cuando el TMR0 haga overflow
+    {
+        CONT_TMR0++;            // Incrementar en 1 la variable CONT_TMR0
+        
+        if (CONT_TMR0 <= V3_ADRESH)     // Si CONT_TMR0 es menor o igual a V3_ADRESH
+        {
+            PORTAbits.RA7 = 1;  // Encender el RA7
+        }
+        else
+        {
+            PORTAbits.RA7 = 0;  // Apagar el RA7
+        }
+        
+        TMR0 = V_TMR0;          // Se carga V_TMR0 al TMR0
+        INTCONbits.T0IF = 0;    // Bajamos la bandera de interrupción del TMR0
+    }
+}
 
 //******************************************************************************
 // Código Principal
@@ -75,6 +105,8 @@ void main(void) {
     setup();
     setupADC();
     setupPWM();
+    
+    CONT_TMR0 = 0;
     
     while(1){
         
@@ -86,7 +118,6 @@ void main(void) {
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;                       //Bajamos la bandera del ADC
         
         V1_ADRESH = ADRESH;             //Pasamos el valor de ADRESH a V1_ADRESH
         convertir(V1_ADRESH);           
@@ -101,11 +132,10 @@ void main(void) {
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;                       //Bajamos la bandera del ADC
         
         V2_ADRESH = ADRESH;             //Pasamos el valor de ADRESH a V2_ADRESH
         convertir(V2_ADRESH);           
-        CCPR1L = SERVO;                 //Se envía el PWM al puerto
+        CCPR2L = SERVO;                 //Se envía el PWM al puerto
         __delay_us(100);
         
         //**********************************************************************
@@ -116,7 +146,6 @@ void main(void) {
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;                       //Bajamos la bandera del ADC
         
         V3_ADRESH = ADRESH;             //Pasamos el valor de ADRESH a V2_ADRESH
         __delay_us(100);
@@ -181,8 +210,8 @@ void setupADC (void){
     TRISAbits.TRISA1 = 1;       //Configuración del RBA1 como input
     ANSELbits.ANS1 = 1;         //Configuración del pin RBA1 como análogo (AN1)
     
-    TRISAbits.TRISA1 = 1;       //Configuración del RBA2 como input
-    ANSELbits.ANS1 = 1;         //Configuración del pin RBA2 como análogo (AN2)
+    TRISAbits.TRISA2 = 1;       //Configuración del RBA2 como input
+    ANSELbits.ANS2 = 1;         //Configuración del pin RBA2 como análogo (AN2)
     
     //Paso 2: Configuración del módulo ADC
     

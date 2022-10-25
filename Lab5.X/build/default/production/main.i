@@ -2675,6 +2675,7 @@ int V1_ADRESH;
 int V2_ADRESH;
 int V3_ADRESH;
 int SERVO;
+uint8_t CONT_TMR0;
 
 
 
@@ -2684,12 +2685,50 @@ void setup(void);
 void setupADC(void);
 void setupPWM(void);
 void convertir(int V_ADRESH);
-# 73 "main.c"
+
+
+
+
+void __attribute__((picinterrupt(("")))) isr (void){
+
+
+
+    if (PIR1bits.ADIF)
+    {
+        PORTBbits.RB7 = 1;
+        PIR1bits.ADIF = 0;
+    }
+
+
+
+    if (INTCONbits.T0IF)
+    {
+        CONT_TMR0++;
+
+        if (CONT_TMR0 <= V3_ADRESH)
+        {
+            PORTAbits.RA7 = 1;
+        }
+        else
+        {
+            PORTAbits.RA7 = 0;
+        }
+
+        TMR0 = 240;
+        INTCONbits.T0IF = 0;
+    }
+}
+
+
+
+
 void main(void) {
 
     setup();
     setupADC();
     setupPWM();
+
+    CONT_TMR0 = 0;
 
     while(1){
 
@@ -2701,7 +2740,6 @@ void main(void) {
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;
 
         V1_ADRESH = ADRESH;
         convertir(V1_ADRESH);
@@ -2716,11 +2754,10 @@ void main(void) {
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;
 
         V2_ADRESH = ADRESH;
         convertir(V2_ADRESH);
-        CCPR1L = SERVO;
+        CCPR2L = SERVO;
         _delay((unsigned long)((100)*(500000/4000000.0)));
 
 
@@ -2731,7 +2768,6 @@ void main(void) {
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
-        ADIF = 0;
 
         V3_ADRESH = ADRESH;
         _delay((unsigned long)((100)*(500000/4000000.0)));
@@ -2796,8 +2832,8 @@ void setupADC (void){
     TRISAbits.TRISA1 = 1;
     ANSELbits.ANS1 = 1;
 
-    TRISAbits.TRISA1 = 1;
-    ANSELbits.ANS1 = 1;
+    TRISAbits.TRISA2 = 1;
+    ANSELbits.ANS2 = 1;
 
 
 
