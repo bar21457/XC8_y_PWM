@@ -9,13 +9,13 @@
 ### Memory Usage ###
  Intel Hex-file ranges:
   0h - 5h		(dist/default/production\Lab5.X.production.hex)
-  8h - FFFh		(dist/default/production\Lab5.X.production.hex)
-  1EB2h - 1FFFh		(dist/default/production\Lab5.X.production.hex)
+  8h - FF9h		(dist/default/production\Lab5.X.production.hex)
+  1EB4h - 1FFFh		(dist/default/production\Lab5.X.production.hex)
   4000h - 4007h		(dist/default/production\Lab5.X.production.hex)
   400Eh - 4011h		(dist/default/production\Lab5.X.production.hex)
  Unused ranges:
   6h - 7h
-  1000h - 1EB1h
+  FFAh - 1EB3h
   2000h - 3FFFh
   4008h - 400Dh
 
@@ -281,9 +281,9 @@
 00000FC0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000FD0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00000FE0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
-00000FF0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00000FF0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 -- -- -- -- -- --
 ----------------------------------------------------------
-00001EB0 | -- -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
+00001EB0 | -- -- -- -- H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001EC0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001ED0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1
 00001EE0 | H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1 H1

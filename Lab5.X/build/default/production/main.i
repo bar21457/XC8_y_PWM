@@ -2695,7 +2695,6 @@ void __attribute__((picinterrupt(("")))) isr (void){
 
     if (PIR1bits.ADIF)
     {
-        PORTBbits.RB7 = 1;
         PIR1bits.ADIF = 0;
     }
 
@@ -2707,11 +2706,11 @@ void __attribute__((picinterrupt(("")))) isr (void){
 
         if (CONT_TMR0 <= V3_ADRESH)
         {
-            PORTAbits.RA7 = 1;
+            PORTDbits.RD0 = 1;
         }
         else
         {
-            PORTAbits.RA7 = 0;
+            PORTDbits.RD0 = 0;
         }
 
         TMR0 = 240;
@@ -2736,7 +2735,7 @@ void main(void) {
 
 
 
-        ADCON0bits.CHS = 0b0001;
+        ADCON0bits.CHS = 0b0000;
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
@@ -2750,7 +2749,7 @@ void main(void) {
 
 
 
-        ADCON0bits.CHS = 0b0010;
+        ADCON0bits.CHS = 0b0001;
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
@@ -2764,7 +2763,7 @@ void main(void) {
 
 
 
-        ADCON0bits.CHS = 0b0011;
+        ADCON0bits.CHS = 0b0010;
         _delay((unsigned long)((100)*(500000/4000000.0)));
         ADCON0bits.GO = 1;
         while (ADCON0bits.GO == 1){};
@@ -2783,22 +2782,17 @@ void setup (void){
 
     ANSELH = 0;
 
-    TRISAbits.TRISA7 = 0;
+    TRISA = 0;
     TRISB = 0;
     TRISC = 0;
     TRISD = 0;
     TRISE = 0;
 
-    PORTAbits.RA7 = 0;
+    PORTA = 0;
     PORTB = 0;
     PORTC = 0;
     PORTD = 0;
     PORTE = 0;
-
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-
-
 
 
 
@@ -2817,8 +2811,15 @@ void setup (void){
     OPTION_REGbits.PS = 0b011;
     TMR0 = 240;
 
-    INTCONbits.PEIE = 1;
+    INTCONbits.TMR0IE = 1;
     INTCONbits.T0IF = 0;
+
+
+
+    INTCONbits.GIE = 1;
+
+
+
 
 }
 
@@ -2886,13 +2887,13 @@ void setupPWM(void){
 
 
 
-    TMR2IF = 0;
+    PIR1bits.TMR2IF = 0;
     T2CONbits.T2CKPS = 0b11;
-    TMR2ON = 1;
+    T2CONbits.TMR2ON = 1;
 
 
 
-    while(!TMR2IF){};
+    while(!PIR1bits.TMR2IF){};
 
     TRISCbits.TRISC2 = 0;
     TRISCbits.TRISC1 = 0;
@@ -2901,6 +2902,6 @@ void setupPWM(void){
 
 void convertir(int V_ADRESH){
 
-    SERVO = (unsigned short) (7+( (float)(14)/(255) ) * (V_ADRESH-0));
+    SERVO = (unsigned short)(7+((float)(9)/(255))*(V_ADRESH-0));
 
 }

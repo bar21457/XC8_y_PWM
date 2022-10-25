@@ -73,7 +73,6 @@ void __interrupt() isr (void){
     
     if (PIR1bits.ADIF)          // Una vez terminada la conversión
     {
-        PORTBbits.RB7 = 1;      // Encender el RB7
         PIR1bits.ADIF = 0;      // Bajamos la bandera de interrupción del ADC
     }
     
@@ -85,11 +84,11 @@ void __interrupt() isr (void){
         
         if (CONT_TMR0 <= V3_ADRESH)     // Si CONT_TMR0 es menor o igual a V3_ADRESH
         {
-            PORTAbits.RA7 = 1;  // Encender el RA7
+            PORTDbits.RD0 = 1;  // Encender el RD0
         }
         else
         {
-            PORTAbits.RA7 = 0;  // Apagar el RA7
+            PORTDbits.RD0 = 0;  // Apagar el RD0
         }
         
         TMR0 = V_TMR0;          // Se carga V_TMR0 al TMR0
@@ -114,7 +113,7 @@ void main(void) {
         //Primer Servomotor
         //**********************************************************************
                                 
-        ADCON0bits.CHS = 0b0001;        //Selección del canal AN1
+        ADCON0bits.CHS = 0b0000;        //Selección del canal AN0
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
@@ -128,7 +127,7 @@ void main(void) {
         //Segundo Servomotor
         //**********************************************************************
                                 
-        ADCON0bits.CHS = 0b0010;        //Selección del canal AN2
+        ADCON0bits.CHS = 0b0001;        //Selección del canal AN1
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
@@ -142,12 +141,12 @@ void main(void) {
         //LED
         //**********************************************************************
                                 
-        ADCON0bits.CHS = 0b0011;        //Selección del canal AN3
+        ADCON0bits.CHS = 0b0010;        //Selección del canal AN2
         __delay_us(100);
         ADCON0bits.GO = 1;              //Iniciamos la conversión en el ADC
         while (ADCON0bits.GO == 1){};
         
-        V3_ADRESH = ADRESH;             //Pasamos el valor de ADRESH a V2_ADRESH
+        V3_ADRESH = ADRESH;             //Pasamos el valor de ADRESH a V3_ADRESH
         __delay_us(100);
         
     }
@@ -161,22 +160,17 @@ void setup (void){
     
     ANSELH = 0;
     
-    TRISAbits.TRISA7 = 0;
+    TRISA = 0;              //Configuración del PORTA como output
     TRISB = 0;              //Configuración del PORTB como output
     TRISC = 0;              //Configuración del PORTC como output
     TRISD = 0;              //Configuración del PORTD como output
     TRISE = 0;              //Configuración del PORTE como output
     
-    PORTAbits.RA7 = 0;
+    PORTA = 0;              //Limpiamos el PORTA
     PORTB = 0;              //Limpiamos el PORTB
     PORTC = 0;              //Limpiamos el PORTC
     PORTD = 0;              //Limpiamos el PORTD
     PORTE = 0;              //Limpiamos el PORTD
-    
-    INTCONbits.GIE = 1;     //Habilitamos las interrupciones globales (GIE)
-    INTCONbits.PEIE = 1;    //Habilitamos las interrupción del PEIE
-    //INTCONbits.RBIF = 1;    //Habilitamos las interrupciones del PORTB (RBIF)
-    //INTCONbits.RBIE = 0;    //Bajamos la bandera de interrupción del PORTB (RBIE)
     
     // Configuración del Oscilador Interno a 500KHz
     
@@ -195,8 +189,15 @@ void setup (void){
     OPTION_REGbits.PS = 0b011;      // Prescaler 1:16
     TMR0 = V_TMR0;                  // Asignamos valor al TMR0 para 2ms
     
-    INTCONbits.PEIE = 1;    //Habilitamos la interrupción del TMR0
+    INTCONbits.TMR0IE = 1;  //Habilitamos la interrupción del TMR0
     INTCONbits.T0IF = 0;    //Bajamos la bandera de interrupción del TMR0
+    
+    // Interrupciones
+    
+    INTCONbits.GIE = 1;     //Habilitamos las interrupciones globales (GIE)
+    //INTCONbits.PEIE = 1;    //Habilitamos las interrupción del PEIE
+    //INTCONbits.RBIF = 1;    //Habilitamos las interrupciones del PORTB (RBIF)
+    //INTCONbits.RBIE = 0;    //Bajamos la bandera de interrupción del PORTB (RBIE)
     
 }
 
@@ -204,14 +205,14 @@ void setupADC (void){
     
     //Paso 1: Selección del puerto de entrada
     
-    TRISAbits.TRISA0 = 1;       //Configuración del RBA0 como input
-    ANSELbits.ANS0 = 1;         //Configuración del pin RBA0 como análogo (AN0)
+    TRISAbits.TRISA0 = 1;       //Configuración del RA0 como input
+    ANSELbits.ANS0 = 1;         //Configuración del pin RA0 como análogo (AN0)
     
-    TRISAbits.TRISA1 = 1;       //Configuración del RBA1 como input
-    ANSELbits.ANS1 = 1;         //Configuración del pin RBA1 como análogo (AN1)
+    TRISAbits.TRISA1 = 1;       //Configuración del RA1 como input
+    ANSELbits.ANS1 = 1;         //Configuración del pin RA1 como análogo (AN1)
     
-    TRISAbits.TRISA2 = 1;       //Configuración del RBA2 como input
-    ANSELbits.ANS2 = 1;         //Configuración del pin RBA2 como análogo (AN2)
+    TRISAbits.TRISA2 = 1;       //Configuración del RA2 como input
+    ANSELbits.ANS2 = 1;         //Configuración del pin RA2 como análogo (AN2)
     
     //Paso 2: Configuración del módulo ADC
     
@@ -224,7 +225,7 @@ void setupADC (void){
     ADCON0bits.CHS0 = 0;
     ADCON0bits.CHS1 = 0;
     ADCON0bits.CHS2 = 0;
-    ADCON0bits.CHS3 = 0;        //Selección del canal análogo AN0
+    ADCON0bits.CHS3 = 0;        //Selección del canal análogo AN0 (Default)
     
     ADCON1bits.ADFM = 0;        //Justificado hacia la izquierda
     
@@ -249,7 +250,7 @@ void setupPWM(void){
     CCP1CONbits.P1M = 0b00;     //Selección del modo Single Output
     
     CCP1CONbits.CCP1M = 0b1100;     // P1A como PWM 
-    CCP2CONbits.CCP2M = 0b1111;     //P2A como PWM
+    CCP2CONbits.CCP2M = 0b1111;     // P2A como PWM
             
    // Paso 4
     
@@ -264,13 +265,13 @@ void setupPWM(void){
     
     // Paso 5
     
-    TMR2IF = 0;                 // Bajamos la bandera de interrupción TMR2
+    PIR1bits.TMR2IF = 0;        // Bajamos la bandera de interrupción TMR2
     T2CONbits.T2CKPS = 0b11;    // Prescaler de 1:16
-    TMR2ON = 1;                 // Se enciende el TMR2
+    T2CONbits.TMR2ON = 1;       // Se enciende el TMR2
     
     // Paso 6
     
-    while(!TMR2IF){};
+    while(!PIR1bits.TMR2IF){};
     
     TRISCbits.TRISC2 = 0;       // Habilitamos la salida del PWM (RC2)
     TRISCbits.TRISC1 = 0;       // Habilitamos la salida del PWM (RC1)
@@ -279,6 +280,6 @@ void setupPWM(void){
 
 void convertir(int V_ADRESH){
 
-    SERVO = (unsigned short) (7+( (float)(14)/(255) ) * (V_ADRESH-0));
+    SERVO = (unsigned short)(7+((float)(9)/(255))*(V_ADRESH-0));
 
 }
