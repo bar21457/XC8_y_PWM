@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+$C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 idloc IDLOC 5 2000 2000 4 2 1
 reset_vec CODE 0 0 0 3 2 1
 end_init CODE 0 C C 3 2 1
@@ -84,22 +84,22 @@ STRING 1000-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Lab5.X.production.o
-F cinit CODE >501:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-F cinit CODE >504:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-F cinit CODE >527:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-10 cinit CODE >528:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-11 cinit CODE >529:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-12 cinit CODE >530:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-13 cinit CODE >531:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-14 cinit CODE >532:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-15 cinit CODE >533:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-16 cinit CODE >534:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-17 cinit CODE >535:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-18 cinit CODE >536:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-19 cinit CODE >537:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-1A cinit CODE >543:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-1A cinit CODE >545:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
-1B cinit CODE >546:C:\Users\byron\AppData\Local\Temp\xcAsvlg.s
+F cinit CODE >501:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+F cinit CODE >504:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+F cinit CODE >527:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+10 cinit CODE >528:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+11 cinit CODE >529:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+12 cinit CODE >530:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+13 cinit CODE >531:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+14 cinit CODE >532:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+15 cinit CODE >533:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+16 cinit CODE >534:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+17 cinit CODE >535:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+18 cinit CODE >536:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+19 cinit CODE >537:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+1A cinit CODE >543:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+1A cinit CODE >545:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
+1B cinit CODE >546:C:\Users\byron\AppData\Local\Temp\xcAsb5s.s
 4 intentry CODE >70:C:\Users\byron\OneDrive\Documents\GitHub\XC8_y_PWM\Lab5.X\main.c
 7D0 text10 CODE >70:C:\Users\byron\OneDrive\Documents\GitHub\XC8_y_PWM\Lab5.X\main.c
 7D0 text10 CODE >74:C:\Users\byron\OneDrive\Documents\GitHub\XC8_y_PWM\Lab5.X\main.c
@@ -684,10 +684,10 @@ __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _TMR0 1 0 ABS 0 - dist/default/production\Lab5.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+___sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 _main CEA 0 CODE 0 maintext dist/default/production\Lab5.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Lab5.X.production.o
-start 18 0 CODE 0 init C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+start 18 0 CODE 0 init C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 ___flmul@aexp 38 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
 ___flmul@bexp 39 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
 ___flmul@prod 3A 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
@@ -696,12 +696,12 @@ ___flmul@temp 3E 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production
 _V3_ADRESH 64 0 BANK0 1 bssBANK0 dist/default/production\Lab5.X.production.o
 _OPTION_REGbits 81 0 ABS 0 - dist/default/production\Lab5.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Lab5.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Lab5.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -719,8 +719,8 @@ __end_of___fladd B76 0 CODE 0 text9 dist/default/production\Lab5.X.production.o
 __end_of___flmul 6C6 0 CODE 0 text7 dist/default/production\Lab5.X.production.o
 __end_of___fltol EF6 0 CODE 0 text6 dist/default/production\Lab5.X.production.o
 __Umul8_16@multiplicand 73 0 COMMON 1 cstackCOMMON dist/default/production\Lab5.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
-___stacklo 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+___stackhi 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
+___stacklo 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 ___fladd@a 44 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
 ___fladd@b 40 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
 ___flmul@a 2A 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
@@ -732,7 +732,7 @@ _TRISCbits 87 0 ABS 0 - dist/default/production\Lab5.X.production.o
 _CONT_TMR0 6A 0 BANK0 1 bssBANK0 dist/default/production\Lab5.X.production.o
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\Lab5.X.production.o
 _convertir EF6 0 CODE 0 text4 dist/default/production\Lab5.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+___int_sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -783,7 +783,7 @@ saved_w 7E 0 ABS 0 - dist/default/production\Lab5.X.production.o
 ___xxtofl B76 0 CODE 0 text5 dist/default/production\Lab5.X.production.o
 __end_of_isr FFA 0 CODE 0 text10 dist/default/production\Lab5.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\byron\AppData\Local\Temp\xcAsvlg.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\byron\AppData\Local\Temp\xcAsb5s.o
 __end_of___xxtofl CEA 0 CODE 0 text5 dist/default/production\Lab5.X.production.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 _PIE1bits 8C 0 ABS 0 - dist/default/production\Lab5.X.production.o
